@@ -1,19 +1,12 @@
 # dotnetbay - A .NET Auction Bootstrapper 
-Master: [![Build status](https://ci.appveyor.com/api/projects/status/icb7nq9u7spaapfx/branch/master?svg=true)](https://ci.appveyor.com/project/michaelschnyder/dotnetbay-hs16/branch/master)
-Project: [![Build status](https://ci.appveyor.com/api/projects/status/icb7nq9u7spaapfx?svg=true)](https://ci.appveyor.com/project/michaelschnyder/dotnetbay-hs16)
+Master: [![Build status](https://ci.appveyor.com/api/projects/status/icb7nq9u7spaapfx/branch/master?svg=true)](https://ci.appveyor.com/project/krma/dotnetbay-hs16/branch/master)
+Project: [![Build status](https://ci.appveyor.com/api/projects/status/icb7nq9u7spaapfx?svg=true)](https://ci.appveyor.com/project/krma/dotnetbay-hs16)
 
-A bootstrap solution to build your own basic auction portal.
+##State of Implementation
+ASP.NET MVC Solution
 
-## Goals
-This is the starting point for various extensions to the core business library. The current storage implementation is done by serializing data to json-files. There is no graphical user interface, just a command line.
+Ths solution contains the sample implementation for lab06 ASP.NET MVC
 
-With focus on the .NET-Stack, at least the following technologies should be added to extend the base implementation.
-
-* WPF / XAML UI
-* EntityFramework
-* ASP.NET MVC 5
-* ASP.NET WebApi
-* ASP.NET SignalR
 
 See more details on the official course website: http://web.fhnw.ch/plattformen/dnead
 
@@ -30,7 +23,7 @@ The following products / tools are needed to contribute / fork.
 
 ## Authors
 * Michael Schnyder
-* Martin Kropp
+* Martin Kropp, martin.kropp@fhnw.ch
 
 ## License
 Licensed under the MIT License
