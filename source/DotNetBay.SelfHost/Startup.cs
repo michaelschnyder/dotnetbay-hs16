@@ -14,6 +14,12 @@ namespace DotNetBay.SelfHost
         {
             app.UseHealth("/health");
             //app.UseHealth();
+            
+            var httpConfig = new HttpConfiguration();
+
+            httpConfig.MapHttpAttributeRoutes();
+            app.UseWebApi(httpConfig);
+
         }
     }
 }
