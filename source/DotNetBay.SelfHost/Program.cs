@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.Entity.SqlServer;
+using System.Net.Http;
 using Microsoft.Owin.Hosting;
 
 namespace DotNetBay.SelfHost
@@ -18,10 +19,16 @@ namespace DotNetBay.SelfHost
             WebApp.Start<Startup>(binding);
 
             Console.WriteLine($"Webserver is running on {binding}");
-            Console.WriteLine("");
 
+            var httpClient = new HttpClient();
+            httpClient.BaseAddress = new Uri(binding);
+            var response = httpClient.GetStringAsync("api/status").Result;
+            Console.WriteLine($"Selfcheck call returned: {response}");
+
+            Console.WriteLine("");
             Console.Write("Press Enter to quit.");
             Console.ReadLine();
+
         }
     }
 }
