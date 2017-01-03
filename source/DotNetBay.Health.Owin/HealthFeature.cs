@@ -8,5 +8,11 @@ namespace DotNetBay.Health.Owin
         {
             appBuilder.Map(path, ab => ab.Use<HealthMiddleware>());
         }
+
+        public static void UseHealth(this IAppBuilder appBuilder)
+        {
+            appBuilder.Use<HealthMiddleware>();
+        }
+
     }
 }
