@@ -52,13 +52,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controller\AuctionController.cs" />
+    <Compile Include="Controller\BidsController.cs" />
     <Compile Include="Controller\StatusController.cs" />
+    <Compile Include="Dtos\AuctionDto.cs" />
+    <Compile Include="Dtos\BidDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\DotNetBay.BusinessLogic\DotNetBay.BusinessLogic.csproj">
+      <Project>{9EF46B21-B552-4CC6-A4C0-E81091A4064B}</Project>
+      <Name>DotNetBay.BusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DotNetBay.Data.EF\DotNetBay.Data.EF.csproj">
+      <Project>{95C884A6-9236-4294-9298-1DF51F21B2E0}</Project>
+      <Name>DotNetBay.Data.EF</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DotNetBay.Data.Entity\DotNetBay.Data.Entity.csproj">
+      <Project>{908D8739-3185-46EB-A03E-6B6C3849857C}</Project>
+      <Name>DotNetBay.Data.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DotNetBay.Interfaces\DotNetBay.Interfaces.csproj">
+      <Project>{17745E6C-337C-44BD-9C50-5F1D45CEADA5}</Project>
+      <Name>DotNetBay.Interfaces</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
