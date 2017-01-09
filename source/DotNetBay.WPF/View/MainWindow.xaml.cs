@@ -1,11 +1,6 @@
-﻿using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Windows;
-using DotNetBay.Core;
-using DotNetBay.Core.Execution;
-using DotNetBay.Data.Entity;
+﻿using System.Windows;
 using DotNetBay.WPF.ViewModel;
+using DotNetBay.WPF.Services;
 
 namespace DotNetBay.WPF.View
 {
@@ -20,11 +15,9 @@ namespace DotNetBay.WPF.View
 
             InitializeComponent();
 
-            var memberService = new SimpleMemberService(app.MainRepository);
-            var auctionService = new AuctionService(app.MainRepository, new SimpleMemberService(app.MainRepository));
+            var auctionService = new RemoteAuctionService();
 
-            this.DataContext = new MainViewModel(app.AuctionRunner.Auctioneer, auctionService);
-
+            this.DataContext = new MainViewModel(null, auctionService);
         }
     }
 }
