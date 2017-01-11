@@ -7,6 +7,7 @@ using DotNetBay.Core;
 using DotNetBay.Data.EF;
 using DotNetBay.Interfaces;
 using DotNetBay.WebApp.ViewModel;
+using DotNetBay.SignalR.Hubs;
 
 namespace DotNetBay.WebApp.Controllers
 {
@@ -53,7 +54,8 @@ namespace DotNetBay.WebApp.Controllers
             {
                 var auction = this.service.GetAll().FirstOrDefault(a => a.Id == bid.AuctionId);
 
-                this.service.PlaceBid(auction, bid.BidAmount);
+                var bidFromDb = this.service.PlaceBid(auction, bid.BidAmount);
+                AuctionsHub.NotifyNewBid(auction, bidFromDb);
             }
 
             return this.RedirectToAction("Index", "Auctions");

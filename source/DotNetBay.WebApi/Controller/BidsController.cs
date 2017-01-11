@@ -7,6 +7,7 @@ using DotNetBay.Data.EF;
 using DotNetBay.Interfaces;
 using DotNetBay.WebApi.Dtos;
 using DotNetBay.Data.Entity;
+using DotNetBay.SignalR.Hubs;
 
 namespace DotNetBay.WebApi.Controller
 {
@@ -56,6 +57,8 @@ namespace DotNetBay.WebApi.Controller
             try
             {
                 var bid = this.auctionService.PlaceBid(auction, dto.Amount);
+                AuctionsHub.NotifyNewBid(auction, bid);
+
                 return this.Created(string.Format("api/bids/{0}", bid.TransactionId), MapBidToDto(bid));
             }
             catch (Exception e)
