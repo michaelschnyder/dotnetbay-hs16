@@ -7,22 +7,27 @@ namespace DotNetBay.SignalR.Hubs
     {
         public static void NotifyNewAuction(Auction auction)
         {
-            GlobalHost.ConnectionManager.GetHubContext<AuctionsHub>().Clients.All.NewAuction(auction.Id, auction);
+            GlobalHost.ConnectionManager.GetHubContext<AuctionsHub>().Clients.All.NewAuction(auction.Id);
+        }
+
+        public static void NotifyNewBid(Auction auction, Bid bid)
+        {
+            GlobalHost.ConnectionManager.GetHubContext<AuctionsHub>().Clients.All.NewBid(auction.Id, bid.Id);
         }
 
         public static void NotifyBidAccepted(Auction auction, Bid bid)
         {
-            GlobalHost.ConnectionManager.GetHubContext<AuctionsHub>().Clients.All.BidAccepted(auction.Id, bid.Id, auction, bid);
+            GlobalHost.ConnectionManager.GetHubContext<AuctionsHub>().Clients.All.BidAccepted(auction.Id, bid.Id);
         }
 
         public static void NotifyAuctionStarted(Auction auction)
         {
-            GlobalHost.ConnectionManager.GetHubContext<AuctionsHub>().Clients.All.AuctionStarted(auction.Id, auction);
+            GlobalHost.ConnectionManager.GetHubContext<AuctionsHub>().Clients.All.AuctionStarted(auction.Id);
         }
 
         public static void NotifyAuctionEnded(Auction auction)
         {
-            GlobalHost.ConnectionManager.GetHubContext<AuctionsHub>().Clients.All.AuctionStarted(auction.Id, auction);
+            GlobalHost.ConnectionManager.GetHubContext<AuctionsHub>().Clients.All.AuctionStarted(auction.Id);
         }
     }
 }
