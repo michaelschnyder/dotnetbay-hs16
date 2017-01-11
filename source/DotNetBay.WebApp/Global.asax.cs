@@ -2,6 +2,7 @@
 using System.Web.Routing;
 using DotNetBay.Core.Execution;
 using DotNetBay.Data.EF;
+using DotNetBay.SignalR.Hubs;
 
 namespace DotNetBay.WebApp
 {
@@ -20,6 +21,26 @@ namespace DotNetBay.WebApp
 
             AuctionRunner = new AuctionRunner(mainRepository);
             AuctionRunner.Start();
+
+            AuctionRunner.Auctioneer.AuctionEnded += Auctioneer_AuctionEnded;
+            AuctionRunner.Auctioneer.AuctionStarted += Auctioneer_AuctionStarted;
+            AuctionRunner.Auctioneer.BidAccepted += Auctioneer_BidAccepted;
+
+        }
+
+        private void Auctioneer_BidAccepted(object sender, ProcessedBidEventArgs e)
+        {
+            AuctionsHub.NotifyBidAccepted(e.Auction, e.Bid);
+        }
+
+        private void Auctioneer_AuctionStarted(object sender, AuctionEventArgs e)
+        {
+            AuctionsHub.NotifyAuctionStarted(e.Auction);
+        }
+
+        private void Auctioneer_AuctionEnded(object sender, AuctionEventArgs e)
+        {
+            AuctionsHub.NotifyAuctionEnded(e.Auction);
         }
     }
 }
