@@ -1,5 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using DotNetBay.Core;
 using DotNetBay.Core.Execution;
@@ -24,10 +26,12 @@ namespace DotNetBay.WPF.ViewModel
             this.AddNewAuctionCommand = new RelayCommand(this.AddNewAuctionAction);
 
             // Register for Events
-            //this.auctioneer.AuctionEnded += (sender, args) => { this.ApplyChanges(args.Auction); };
-            //this.auctioneer.AuctionStarted += (sender, args) => { this.ApplyChanges(args.Auction); };
-            //this.auctioneer.BidAccepted += (sender, args) => { this.ApplyChanges(args.Auction); };
-            //this.auctioneer.BidDeclined += (sender, args) => { this.ApplyChanges(args.Auction); };
+            var taskScheduler = TaskScheduler.FromCurrentSynchronizationContext(); // The UI Thread TaskScheduler instance
+            
+            this.auctioneer.AuctionEnded += (sender, args) => { Task.Factory.StartNew(() => this.ApplyChanges(args.Auction), CancellationToken.None, TaskCreationOptions.None, taskScheduler); };
+            this.auctioneer.AuctionStarted += (sender, args) => { Task.Factory.StartNew(() => this.ApplyChanges(args.Auction), CancellationToken.None, TaskCreationOptions.None, taskScheduler); };
+            this.auctioneer.BidAccepted += (sender, args) => { Task.Factory.StartNew(() => this.ApplyChanges(args.Auction), CancellationToken.None, TaskCreationOptions.None, taskScheduler); };
+            this.auctioneer.BidDeclined += (sender, args) => { Task.Factory.StartNew(() => this.ApplyChanges(args.Auction), CancellationToken.None, TaskCreationOptions.None, taskScheduler); };
 
             // Setup UI
             var allAuctions = this.auctionService.GetAll();
