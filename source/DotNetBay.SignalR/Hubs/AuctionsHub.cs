@@ -30,10 +30,5 @@ namespace DotNetBay.SignalR.Hubs
         {
             GlobalHost.ConnectionManager.GetHubContext<AuctionsHub>().Clients.All.AuctionStarted(auction.Id, auction.Title);
         }
-
-        public override Task OnConnected()
-        {
-            return base.OnConnected();
-        }
     }
 }
