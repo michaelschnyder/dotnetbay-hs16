@@ -70,7 +70,7 @@ namespace DotNetBay.WPF.ViewModel
 
         private void ApplyChanges(Auction auction)
         {
-            var auctionVm = this.auctions.FirstOrDefault(vm => vm.Auction == auction);
+            var auctionVm = this.auctions.FirstOrDefault(vm => vm.Auction.Id == auction.Id);
 
             if (auctionVm != null)
             {
