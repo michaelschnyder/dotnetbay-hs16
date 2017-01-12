@@ -50,14 +50,14 @@
         // Reference the auto-generated proxy for the hub.
         var auctionsHub = $.connection.auctionsHub;
 
+        auctionsHub.client.newAuction = function (auctionId, auctionTitle, amount) { console.log('new auction \'' + auctionTitle + '\' (' + amount + ')'); }
+        auctionsHub.client.bidAccepted = function (auctionId, auctionTitle, amount, bidder) { console.log('new bid for auction \'' + auctionTitle + '\' by \'' + bidder + '\''); }
+        auctionsHub.client.auctionStarted = function (auctionId, auctionTitle) { console.log('auction started \'' + auctionTitle + '\''); }
+        auctionsHub.client.auctionEnded = function (auctionId, auctionTitle) { console.log('auction ended \'' + auctionTitle + '\''); }
+
         // Start the connection.
         $.connection.hub.start().done(function () {
             console.info('connected to signalR');
-
-            auctionsHub.client.newAuction = function (auctionId, auctionTitle, amount) { console.log('new auction \'' + auctionTitle + '\' (' + amount + ')'); }
-            auctionsHub.client.bidAccepted = function (auctionId, auctionTitle, amount, bidder) { console.log('new bid for auction \'' + auctionTitle + '\' by \'' + bidder + '\''); }
-            auctionsHub.client.auctionStarted = function (auctionId, auctionTitle) { console.log('auction started \'' + auctionTitle + '\''); }
-            auctionsHub.client.auctionEnded = function (auctionId, auctionTitle) { console.log('auction ended \'' + auctionTitle + '\''); }
 
         });
     });

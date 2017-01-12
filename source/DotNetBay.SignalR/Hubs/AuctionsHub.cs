@@ -33,7 +33,6 @@ namespace DotNetBay.SignalR.Hubs
 
         public override Task OnConnected()
         {
-            this.Clients.Caller.AuctionStarted(42, "hahaqh");
             return base.OnConnected();
         }
     }
