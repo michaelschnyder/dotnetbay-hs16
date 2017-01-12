@@ -76,6 +76,11 @@ namespace DotNetBay.WPF.ViewModel
             {
                 auctionVm.Update(auction);
             }
+            else
+            {
+                auctionVm = new AuctionViewModel(auction);
+                this.auctions.Add(auctionVm);
+            }
         }
     }
 }
