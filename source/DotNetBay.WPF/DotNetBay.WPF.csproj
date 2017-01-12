@@ -101,6 +101,7 @@
     <Compile Include="Converter\IsClosedToStatusTextConverter.cs" />
     <Compile Include="Services\AuctionDto.cs" />
     <Compile Include="Services\BidDto.cs" />
+    <Compile Include="Services\RemoteAuctioneer.cs" />
     <Compile Include="Services\RemoteAuctionService.cs" />
     <Compile Include="ViewModel\AuctionViewModel.cs" />
     <Compile Include="ViewModel\BidViewModel.cs" />
