@@ -16,8 +16,9 @@ namespace DotNetBay.WPF.View
             InitializeComponent();
 
             var auctionService = new RemoteAuctionService();
+            var auctioneer = new RemoteAuctioneer(auctionService);
 
-            this.DataContext = new MainViewModel(null, auctionService);
+            this.DataContext = new MainViewModel(auctioneer, auctionService);
         }
     }
 }
