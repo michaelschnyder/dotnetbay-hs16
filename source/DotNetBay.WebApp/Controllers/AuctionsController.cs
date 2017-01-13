@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
 using DotNetBay.Core;
-using DotNetBay.Data.EF;
 using DotNetBay.Data.Entity;
 using DotNetBay.WebApp.ViewModel;
 using DotNetBay.SignalR.Hubs;
@@ -11,14 +10,12 @@ namespace DotNetBay.WebApp.Controllers
     public class AuctionsController : Controller
     {
         private readonly IAuctionService service;
-        private EFMainRepository mainRepository;
+        private readonly IMemberService memberService;
 
-        public AuctionsController()
+        public AuctionsController(IAuctionService service, IMemberService memberService)
         {
-            this.mainRepository = new EFMainRepository();
-
-            this.service = new AuctionService(this.mainRepository, new SimpleMemberService(this.mainRepository));
-
+            this.service = service;
+            this.memberService = memberService;
         }
 
         // GET: Auctions
@@ -39,8 +36,6 @@ namespace DotNetBay.WebApp.Controllers
         {
             if (this.ModelState.IsValid)
             {
-                var members = new SimpleMemberService(this.mainRepository);
-
                 var newAuction = new Auction()
                 {
                     Title = auction.Title,
@@ -48,7 +43,7 @@ namespace DotNetBay.WebApp.Controllers
                     StartDateTimeUtc = auction.StartDateTimeUtc,
                     EndDateTimeUtc = auction.EndDateTimeUtc,
                     StartPrice = auction.StartPrice,
-                    Seller = members.GetCurrentMember()
+                    Seller = this.memberService.GetCurrentMember()
                 };
 
                 // Get File Contents
@@ -71,7 +66,7 @@ namespace DotNetBay.WebApp.Controllers
         [HttpGet]
         public ActionResult Image(int auctionId)
         {
-            var auction = this.mainRepository.GetAuctions().FirstOrDefault(a => a.Id == auctionId);
+            var auction = this.service.GetAll().FirstOrDefault(a => a.Id == auctionId);
 
             if (auction == null)
             {

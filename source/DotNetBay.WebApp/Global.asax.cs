@@ -1,8 +1,11 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using System.Web.Routing;
 using DotNetBay.Core.Execution;
 using DotNetBay.Data.EF;
 using DotNetBay.SignalR.Hubs;
+using Microsoft.Practices.Unity;
+using Unity.Mvc5;
 
 namespace DotNetBay.WebApp
 {
@@ -15,17 +18,19 @@ namespace DotNetBay.WebApp
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
 
+            var container = new WebUnityContainer();
+            DependencyResolver.SetResolver(new UnityDependencyResolver(container));
+
             // DotNetBay startup
-            var mainRepository = new EFMainRepository();
+            var mainRepository = container.Resolve<EFMainRepository>();
             mainRepository.SaveChanges();
 
-            AuctionRunner = new AuctionRunner(mainRepository);
+            AuctionRunner = container.Resolve<AuctionRunner>(new ParameterOverride("checkInterval", TimeSpan.FromSeconds(5)));
             AuctionRunner.Start();
 
             AuctionRunner.Auctioneer.AuctionEnded += Auctioneer_AuctionEnded;
             AuctionRunner.Auctioneer.AuctionStarted += Auctioneer_AuctionStarted;
             AuctionRunner.Auctioneer.BidAccepted += Auctioneer_BidAccepted;
-
         }
 
         private void Auctioneer_BidAccepted(object sender, ProcessedBidEventArgs e)
