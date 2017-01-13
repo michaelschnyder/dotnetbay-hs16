@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using System.Web.Http;
 
 using DotNetBay.Core;
-using DotNetBay.Data.EF;
 using DotNetBay.WebApi.Dtos;
 using DotNetBay.Data.Entity;
 using DotNetBay.SignalR.Hubs;
@@ -21,12 +20,10 @@ namespace DotNetBay.WebApi.Controller
 
         private readonly IMemberService memberService;
 
-        public AuctionController()
+        public AuctionController(IAuctionService auctionService, IMemberService memberService)
         {
-            var repo = new EFMainRepository();
-            this.memberService = new SimpleMemberService(repo);
-
-            this.auctionService = new AuctionService(repo, this.memberService);
+            this.auctionService = auctionService;
+            this.memberService = memberService;
         }
 
         [HttpGet]

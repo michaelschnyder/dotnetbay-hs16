@@ -83,10 +83,6 @@
       <Project>{9EF46B21-B552-4CC6-A4C0-E81091A4064B}</Project>
       <Name>DotNetBay.BusinessLogic</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DotNetBay.Data.EF\DotNetBay.Data.EF.csproj">
-      <Project>{95C884A6-9236-4294-9298-1DF51F21B2E0}</Project>
-      <Name>DotNetBay.Data.EF</Name>
-    </ProjectReference>
     <ProjectReference Include="..\DotNetBay.Data.Entity\DotNetBay.Data.Entity.csproj">
       <Project>{908D8739-3185-46EB-A03E-6B6C3849857C}</Project>
       <Name>DotNetBay.Data.Entity</Name>

@@ -3,8 +3,6 @@ using System.Linq;
 using System.Web.Http;
 
 using DotNetBay.Core;
-using DotNetBay.Data.EF;
-using DotNetBay.Interfaces;
 using DotNetBay.WebApi.Dtos;
 using DotNetBay.Data.Entity;
 using DotNetBay.SignalR.Hubs;
@@ -15,23 +13,16 @@ namespace DotNetBay.WebApi.Controller
     {
         private readonly IAuctionService auctionService;
 
-        private readonly IMemberService memberService;
-
-        private IMainRepository repo;
-
-        public BidsController()
+    public BidsController(IAuctionService auctionService)
         {
-            this.repo = new EFMainRepository();
-            this.memberService = new SimpleMemberService(this.repo);
-
-            this.auctionService = new AuctionService(this.repo, this.memberService);
+            this.auctionService = auctionService;
         }
 
         [HttpGet]
         [Route("api/auctions/{auctionId}/bids")]
         public IHttpActionResult GetAllBidsPerAuction(long auctionId)
         {
-            var auction = this.repo.GetAuctions().FirstOrDefault(a => a.Id == auctionId);
+            var auction = this.auctionService.GetAll().FirstOrDefault(a => a.Id == auctionId);
 
             if (auction == null)
             {
@@ -47,7 +38,7 @@ namespace DotNetBay.WebApi.Controller
         [Route("api/auctions/{auctionId}/bids")]
         public IHttpActionResult PlaceBid(long auctionId, BidDto dto)
         {
-            var auction = this.repo.GetAuctions().FirstOrDefault(a => a.Id == auctionId);
+            var auction = this.auctionService.GetAll().FirstOrDefault(a => a.Id == auctionId);
 
             if (auction == null)
             {
@@ -65,20 +56,6 @@ namespace DotNetBay.WebApi.Controller
             {
                 return this.BadRequest(e.Message);
             }
-        }
-
-        [HttpGet]
-        [Route("api/bids/{transactionId}")]
-        public IHttpActionResult GetBidByTransationId(Guid transactionId)
-        {
-            var bid = this.repo.GetBidByTransactionId(transactionId);
-
-            if (bid == null)
-            {
-                return this.NotFound();
-            }
-
-            return this.Ok(MapBidToDto(bid));
         }
 
         private static BidDto MapBidToDto(Bid bid)
