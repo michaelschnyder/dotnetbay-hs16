@@ -187,6 +187,8 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModel\NewAuctionViewModel.cs" />
     <Compile Include="ViewModel\NewBidViewModel.cs" />
+    <Compile Include="WebApiUnityResolver.cs" />
+    <Compile Include="WebUnityContainer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -233,6 +235,9 @@
       <Project>{33b8cc4d-5328-4bbb-a524-c70fc0c8b03b}</Project>
       <Name>DotNetBay.WebApi</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -30,6 +30,8 @@ namespace DotNetBay.WebApp
 
             config.Formatters.Remove(config.Formatters.XmlFormatter);
 
+            config.DependencyResolver = new WebApiUnityResolver(new WebUnityContainer());
+
             app.UseWebApi(config);
 
             app.MapSignalR();

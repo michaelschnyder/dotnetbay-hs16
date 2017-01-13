@@ -13,7 +13,7 @@ namespace DotNetBay.WebApi.Controller
     {
         private readonly IAuctionService auctionService;
 
-    public BidsController(IAuctionService auctionService)
+        public BidsController(IAuctionService auctionService)
         {
             this.auctionService = auctionService;
         }
