@@ -138,6 +138,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="WpfUnityContainer.cs" />
     <Page Include="View\BidView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -183,10 +184,6 @@
     <ProjectReference Include="..\DotNetBay.BusinessLogic\DotNetBay.BusinessLogic.csproj">
       <Project>{9ef46b21-b552-4cc6-a4c0-e81091a4064b}</Project>
       <Name>DotNetBay.BusinessLogic</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DotNetBay.Data.EF\DotNetBay.Data.EF.csproj">
-      <Project>{95c884a6-9236-4294-9298-1df51f21b2e0}</Project>
-      <Name>DotNetBay.Data.EF</Name>
     </ProjectReference>
     <ProjectReference Include="..\DotNetBay.Data.Entity\DotNetBay.Data.Entity.csproj">
       <Project>{908d8739-3185-46eb-a03e-6b6c3849857c}</Project>

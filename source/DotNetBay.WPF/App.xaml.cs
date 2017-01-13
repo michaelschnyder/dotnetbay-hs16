@@ -5,8 +5,6 @@ using System.Linq;
 using System.Windows;
 using DotNetBay.Core;
 using DotNetBay.Core.Execution;
-using DotNetBay.Data.EF;
-using DotNetBay.Data.EF.Migrations;
 using DotNetBay.Data.Entity;
 using DotNetBay.Interfaces;
 

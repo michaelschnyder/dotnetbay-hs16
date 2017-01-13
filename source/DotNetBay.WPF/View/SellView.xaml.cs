@@ -8,6 +8,7 @@ using DotNetBay.Data.Entity;
 using DotNetBay.WPF.ViewModel;
 using Microsoft.Win32;
 using DotNetBay.WPF.Services;
+using Microsoft.Practices.Unity;
 
 namespace DotNetBay.WPF.View
 {
@@ -21,12 +22,7 @@ namespace DotNetBay.WPF.View
         {
             this.InitializeComponent();
 
-
-            var app = Application.Current as App;
-            var auctionService = new RemoteAuctionService();
-
-            this.DataContext = new SellViewModel(auctionService);
+            this.DataContext = WpfUnityContainer.Instance.Resolve<SellViewModel>();
         }
     }
-
 }

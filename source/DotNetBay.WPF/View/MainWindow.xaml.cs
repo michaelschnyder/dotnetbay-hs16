@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using DotNetBay.WPF.ViewModel;
 using DotNetBay.WPF.Services;
+using Microsoft.Practices.Unity;
 
 namespace DotNetBay.WPF.View
 {
@@ -15,10 +16,7 @@ namespace DotNetBay.WPF.View
 
             InitializeComponent();
 
-            var auctionService = new RemoteAuctionService();
-            var auctioneer = new RemoteAuctioneer(auctionService);
-
-            this.DataContext = new MainViewModel(auctioneer, auctionService);
+            this.DataContext = WpfUnityContainer.Instance.Resolve<MainViewModel>();
         }
     }
 }
